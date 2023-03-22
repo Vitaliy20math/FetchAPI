@@ -9,280 +9,9 @@
     <meta charset="UTF-8">
     <title>User</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<style>
-    .container-header-logout{
-        /*margin-left: 1150px;*/
-        padding-left: 40px;
-        height: 50px;
-        display: flex;
-
-    }
-    .container-with-users-data{
-        margin-top: 10px;
-        /*margin-left: 30px;*/
-        padding-left: 30px;
-        display: flex;
-        text-align: center;
-
-
-    }
-    .container-with-users-data-username-text{
-        width: 370px;
-        position: fixed;
-    }
-    .btn-outline-danger{
-        margin-top: 5px;
-        background-color: rgb(52,58,64);
-        border-color: rgb(52, 58, 64);
-
-    }
-    .header{
-        background-color: rgb(52,58,64);
-        display: flex;
-
-
-    }
-    .flex-container{
-        display: flex;
-        width: 400px;
-    }
-    .flex-container-section{
-        display: flex;
-        height: 600px;
-        width: 200px;
-        background-color: rgb(242,242,242);
-    }
-    .table-header{
-        margin-left: 400px;
-        margin-top: 25px;
-        width: 700px;
-    }
-    .nav{
-        width: 800px;
-        border-color: bisque;
-    }
-    .form-add-new-user{
-
-        padding-left: 270px;
-    }
-    #profile{
-        background-color: rgb(242,242,242);
-    }
-    .section-container{
-        background-color: rgb(248,249,250);
-    }
-    .login {
-        width: 250px;
-        margin: 100px auto;
-    }
-    .login h4 {
-        font-weight: 900;
-        margin-top: 20px;
-    }
-    .login h6 {
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
-    .login input {
-        width: 100%;
-    }
-    .login .login-button {
-        margin-top: 5px;
-        border-radius: 5px;
-        border-color: dodgerblue;
-        background-color: dodgerblue;
-        color: white;
-    }
-    .login .login-text-field {
-        border-radius: 5px;
-        background-color: #ffffff;
-    }
-    .login .login-text-field:focus {
-        box-shadow: 0 0 2px 2px dodgerblue;
-    }
-    .login p {
-        font-size: .8em;
-        font-style: italic;
-    }
-    .login ul {
-        list-style-type: none;
-    }
-    .login .form-check-label {
-        width: 150px;
-    }
-    .login .form-check-input {
-        width: 20px;
-    }
-
-    /*Header in admin and user pages*/
-    header {
-        background-color: #1b1b19;
-        color: white;
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 10px 30px;
-        font-size: 1.5em;
-    }
-    header .align-right {
-        text-align: right;
-    }
-    .logout-button {
-        text-align: right;
-        background-color: #1b1b19;
-        border: #1b1b19;
-        color: #b9bfb3;
-        font-size: .7em;
-    }
-
-
-    /*Container in admin and user pages which contains buttons to choose role and user(s) info */
-    .container {
-        margin: 0;
-        width: 100%;
-    }
-    .container .buttons {
-        width: 100%;
-        margin-right: auto;
-        margin-left: 0;
-        padding: 0px -12px;
-        background-color: white;
-    }
-    .container .buttons .active-role {
-        background-color: dodgerblue;
-        color: white;
-        border-radius: 3px;
-        padding: 10px 20px;
-
-    }
-    .container .buttons input {
-        color: dodgerblue;
-        background-color: white;
-        border: none;
-        padding: 20px;
-    }
-    .container .col-10 {
-        background-color: #ebebe9;
-        min-height: 800px;
-        padding-bottom: 20px;
-    }
-    .container h1 {
-        padding: 10px;
-    }
-
-    .btn-delete-user, .btn-edit-user {
-        border: none;
-        border-radius: 3px;
-        color: white;
-        padding: 5px 15px;
-    }
-    .btn-edit-user {
-        background-color: #09a292;
-    }
-    .btn-delete-user {
-        background-color: #c92137;
-    }
-
-    /* Table stylesheet */
-    .my-table {
-        width: 100%;
-        padding: 5px 5px;
-        background-color: white;
-        caption-side: top;
-        border: 20px solid white;
-        border-radius: 5px;
-    }
-    caption {
-        background-color: #dcdcda;
-        padding-left: 20px;
-        font-weight: 700;
-    }
-    .my-table th, td {
-        min-width: 100px;
-        padding: 5px 20px;
-    }
-    .my-table td {
-        border-bottom: 2px solid #dcdcda;
-    }
-    .my-table .odd {
-        background-color: #dcdcda;
-    }
-
-    /* Matching tabs at admin page */
-    #tab1:checked ~ #user-table,
-    #tab2:checked ~ #add-user {display: block}
-
-    /* Tabs stylesheet*/
-    .tabs {
-        width: 100%; padding: 0px; margin: 0 auto;
-    }
-    .tabs>input {
-        display: none;
-    }
-    .tabs>div {
-        display: none;
-        padding: 12px;
-        border: 1px solid #C0C0C0;
-        background: #ebebe9;
-    }
-    .tabs>label {
-        display: inline-block;
-        padding: 7px;
-        margin: 0 -5px -1px 0;
-        text-align: center;
-        color: #666666;
-        border: 1px solid #C0C0C0;
-        background: #E0E0E0;
-        cursor: pointer;
-    }
-    .tabs>input:checked + label {
-        color: #000000;
-        border: 1px solid #C0C0C0;
-        border-bottom: 1px solid #FFFFFF;
-        background: #FFFFFF;
-    }
-
-    /* Stylesheet for user adding form */
-    .add-user {
-        width: 500px;
-        padding-left: 300px;
-        background: #ebebe9;
-    }
-    .add-user h4 {
-        font-size: 0.8em;
-    }
-    .add-user ul {
-        list-style-type: none;
-    }
-    .add-user h6 {
-        font-weight: bold;
-        padding-top: 10px;
-    }
-    .add-user .login-button {
-        background-color: #2ea037;
-        border-color: #2ea037;
-        border-radius: 4px;
-        color: white;
-    }
-
-    .modal-body {
-        text-align: center;
-    }
-    .modal-body ul {
-        list-style-type: none;
-    }
-    .modal-body .form-select {
-        width: 30%;
-        margin: 0 auto;
-    }
-
-    .add-user .login-text-field {
-        border-radius: 5px;
-        background-color: #ffffff;
-    }
-</style>
 <header>
     <div class="row">
         <div class="col-10" th:each="user: ${infoUser}">
@@ -331,16 +60,14 @@
             <h1>Информация о Пользователе</h1>
 
             <table class="my-table">
-                <tr>
-                    <th>Username</th>
-                    <th>Surname</th>
-                    <th>Roles</th>
-                </tr>
-                <tr class="odd" th:each="user: ${infoUser}">
-                    <td th:text="${user.getName()}">First Name</td>
-                    <td th:text="${user.getSurname()}">Last Name</td>
-                    <td th:text="${#strings.arrayJoin(user.getRoles(), ', ')}">ADMIN, USER</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Surname</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody id="data-about-user"></tbody>
             </table>
 
         </div>
@@ -350,5 +77,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/userPage.js"></script>
 </body>
 </html>

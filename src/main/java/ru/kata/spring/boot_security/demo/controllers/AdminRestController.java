@@ -1,7 +1,8 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.Role;
@@ -9,36 +10,39 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
-@Controller
-@RequestMapping("/admin")
-public class AdminControllers {
+@RestController
+@RequestMapping("api/admin")
+public class AdminRestController {
     private final UserService userService;
 
     private final RoleService roleService;
 
     @Autowired
-    public AdminControllers(UserService userService, RoleService roleService) {
+    public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
     @GetMapping()
-    public String index(Model model, Principal principal) {
-        Long id = userService.findByUsername(principal.getName()).getId();
-        model.addAttribute("users", userService.allUsers());
-        model.addAttribute("user", new User());
-        model.addAttribute("infoTop", userService.findUserById(id));
-        model.addAttribute("list", roleService.getRoles());
-        return "listUsers";
+    public ResponseEntity<List<User>> showUsers() {
+        return new ResponseEntity<>(userService.allUsers(), HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(userService.findUserById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable("id") Long id,
+                                           @RequestBody  User user) {
+        System.err.println(user.toString());
+        userService.update(user, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping("/create")
     public String createUserFrom(Model model) {
@@ -63,8 +67,6 @@ public class AdminControllers {
         return "edit";
     }
 
-
-
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("userUp") User user, @PathVariable("id") Long id) {
         System.err.println("point three: " + user);
@@ -77,6 +79,4 @@ public class AdminControllers {
         userService.deleteUser(id);
         return "redirect:/admin";
     }
-
-
 }

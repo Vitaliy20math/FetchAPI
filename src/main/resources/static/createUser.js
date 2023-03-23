@@ -9,15 +9,15 @@ createUser.addEventListener('submit', (e)=>{
     let rolesValue = getRoles(Array.from(document.getElementById("newRole").selectedOptions).map(role => role.value));
     console.log(nameValue + " " + lastNameValue + " " + passwordValue + " " + rolesValue)
 
-    fetch('http://localhost:8080/api/admin/users', {
+    fetch('http://localhost:8080/api/admin/', {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'
         },
         body: JSON.stringify({
-            name: nameValue,
-            lastName: lastNameValue,
+            username: nameValue,
+            surname: lastNameValue,
             password: passwordValue,
             roles: rolesValue,
         })

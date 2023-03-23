@@ -58,13 +58,13 @@ editUserForm.addEventListener('submit', async (e) => {
         })
 })
 
-function getEditRoles(rols) {
+function getEditRoles(roles_) {
     let roles = [];
-    if (rols.indexOf("ADMIN") >= 0) {
+    if (roles_.indexOf("ADMIN") >= 0) {
         roles.push({"id": 1,
             "name": 'ROLE_ADMIN'});
     }
-    if (rols.indexOf("USER") >= 0) {
+    if (roles_.indexOf("USER") >= 0) {
         roles.push({"id": 2,
             "name": 'ROLE_USER'});
     }
